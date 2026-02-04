@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Goat_WordleApp: App {
+    
+    @StateObject var dm = WordleDataModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(dm)
         }
     }
 }
