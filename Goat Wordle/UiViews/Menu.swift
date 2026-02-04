@@ -11,12 +11,20 @@ struct Menu: View {
     var body: some View {
         NavigationStack {
             VStack {
+                
+                Text("MENU")
+                    .font(.system(size: 45, weight: .bold, design: .rounded))
+                    .padding()
+                    .padding(.horizontal, 100)
+                    .background(Color.mint)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.orange, lineWidth: 5))
                 HStack {
                     Image("silly_goat")
                         .resizable()
                         .scaledToFit()
                     Spacer()
                     Spacer()
+                    /*
                     NavigationLink(destination: PlayScreen().navigationBarBackButtonHidden(true)) {
                         Text("Menu")
                             .font(.system(size: 30, weight: .bold, design: .rounded))
@@ -27,23 +35,16 @@ struct Menu: View {
                         
                         
                         
-                    }
+                    } */
                 }
-                Text("MENU")
-                    .font(.system(size: 45, weight: .bold, design: .rounded))
-                    .padding()
-                    .background(Color.mint)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.orange, lineWidth: 5))
-                Image("white_hornless_goat")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundStyle(.tint)
                 
             }
             .padding()
+            
+            Spacer()
         }
     }
 }
 #Preview {
-    PlayScreen()
+    Menu()
 }
