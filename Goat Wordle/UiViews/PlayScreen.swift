@@ -46,9 +46,7 @@ struct PlayScreen: View {
                             .navigationBarTitleDisplayMode(.inline)
                     }
                             ToolbarItem(placement: .topBarLeading) {
-                                Button {
-                                    
-                                } label: {
+                                NavigationLink(destination: directions()) {
                                     Text("?  ")
                                     
                                         .font(.system(size: 40, weight: .bold, design: .rounded))
