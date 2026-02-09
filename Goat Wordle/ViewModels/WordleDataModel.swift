@@ -11,6 +11,8 @@ class WordleDataModel: ObservableObject {
     @Published var guesses: [Guess] = []
     
     var keyColors = [String: Color]()
+    
+    
     var selectedWord = ""
     var currentWord = ""
     var tryIndex = 0
@@ -28,6 +30,7 @@ class WordleDataModel: ObservableObject {
         newGame()
     }
     
+    // mark : setup
     func newGame() {
         populateDefaults()
         selectedWord = Global.commonWords.randomElement()!
@@ -39,6 +42,10 @@ class WordleDataModel: ObservableObject {
         guesses = []
         for index in 0...5 {
             guesses.append(Guess(index: index))
+        }
+        let letters = "ABCDEFGHIJKLOMNOPQRSTUVWXYZ"
+        for char in letters {
+            keyColors[String(char)] = .unused
         }
     }
     

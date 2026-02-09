@@ -11,9 +11,23 @@ struct PlayScreen: View {
     @EnvironmentObject var dm: WordleDataModel
     var body: some View {
         NavigationStack {
-            NavigationView {
                 VStack {
-                    
+                    HStack {
+                        Image("silly_goat")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 75)
+                        Image("baby_goat")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 75)
+                        Image("white_hornless_goat")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundStyle(.tint)
+                            .frame(height: 75)
+                        
+                    }
                     VStack(spacing: 3) {
                         GuessView(guess: $dm.guesses[0])
                         GuessView(guess: $dm.guesses[1])
@@ -24,15 +38,11 @@ struct PlayScreen: View {
                     }
                     .frame(width: Global.boardWidth, height: 6 * Global.boardWidth/5)
                     
-                    HStack {
-                        Image("silly_goat")
-                            .resizable()
-                            .scaledToFit()
-                        Image("baby_goat")
-                            .resizable()
-                            .scaledToFit()
-                        
-                    }
+                    Keyboard()
+                        .scaleEffect(Global.keyboardScale)
+                    
+                    Spacer()
+                    
                     
                     .toolbar {
                         ToolbarItem(placement: .principal) {
@@ -70,18 +80,21 @@ struct PlayScreen: View {
                             }
                         }
                     }
-                    
                     /*
-                    Image("white_hornless_goat")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundStyle(.tint) */
+                    HStack() {
+                        Image("white_hornless_goat")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundStyle(.tint)
+                            .frame(height: 60)
+                        
+                    }
+                     */
                     
                 }
                 .padding()
                 
-                
-            }
+              
         }
     }
 }
