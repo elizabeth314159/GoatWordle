@@ -16,6 +16,7 @@ class WordleDataModel: ObservableObject {
     var selectedWord = ""
     var currentWord = ""
     var tryIndex = 0
+    
     var inPlay = false
     
     var gameStarted: Bool {
@@ -56,7 +57,11 @@ class WordleDataModel: ObservableObject {
     }
     
     func enterWord() {
-        
+        if verifyWord() {
+            print("Valid word")
+        } else {
+            print("invalid")
+        }
     }
     
     func removeLetterFromCurrentWord() {
@@ -67,5 +72,9 @@ class WordleDataModel: ObservableObject {
     func updateRow() {
         let guessWord = currentWord.padding(toLength: 5, withPad: " ", startingAt: 0)
         guesses[tryIndex].word = guessWord
+    }
+    
+    func verifyWord() -> Bool {
+        UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: currentWord)
     }
 }
