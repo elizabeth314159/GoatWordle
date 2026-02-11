@@ -18,6 +18,7 @@ class WordleDataModel: ObservableObject {
     var tryIndex = 0
     
     var inPlay = false
+    var gameOver = false
     
     var gameStarted: Bool {
         !currentWord.isEmpty || tryIndex > 0
@@ -57,10 +58,24 @@ class WordleDataModel: ObservableObject {
     }
     
     func enterWord() {
-        if verifyWord() {
-            print("Valid word")
+        if currentWord == selectedWord {
+            gameOver = true
+            print("you win")
+            setCurrentGuessColors()
+            inPlay = false
         } else {
-            print("invalid")
+            if verifyWord() {
+                print("Valid word")
+                setCurrentGuessColors()
+                tryIndex += 1
+                if tryIndex == 6 {
+                    gameOver = true
+                    inPlay = false
+                    print("you lose")
+                }
+            } else {
+                print("invalid")
+            }
         }
     }
     
@@ -76,5 +91,29 @@ class WordleDataModel: ObservableObject {
     
     func verifyWord() -> Bool {
         UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: currentWord)
+    }
+    
+    func setCurrentGuessColors() {
+        let correctLetters = selectedWord.map { String($0) }
+        var frequency = [String : Int]()
+        for letter in correctLetters {
+            frequency[letter, default: 0] += 1
+        }
+        for index in 0...4 {
+            let correctLetter = correctLetters[index]
+            let guessLetter = guesses[tryIndex].guessLetters[index]
+            if guessLetter == correctLetter {
+                guesses[tryIndex].bgColors[index] = .correct
+                frequency[guessLetter]! -= 1
+            }
+            
+            for index in 0...4 {
+                let guessLetter = guesses[tryIndex].guessLetters[index]
+                if correctLetters.contains(guessLetter) && guesses[tryIndex].bgColors[index] != .correct && frequency[guessLetter]! > 0 {
+                    guesses[tryIndex].bgColors[index] = .misplaced
+                    frequency[guessLetter]! -= 1
+                }
+            }
+        }
     }
 }
