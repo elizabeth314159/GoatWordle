@@ -7,13 +7,16 @@
 
 import SwiftUI
 
-struct Guess {
+class Guess : ObservableObject {
     let index: Int
-    var word = "     "
-    var bgColors = [Color](repeating: .wrong, count: 5)
-    var cardFlipped = [Bool](repeating: false, count: 5)
+    @Published var word = "     "
+    @Published var bgColors = [Color](repeating: .wrong, count: 5)
+    @Published var cardFlipped = [Bool](repeating: false, count: 5)
     var guessLetters: [String] {
         word.map { String($0) }
+    }
+    init(index: Int) {
+           self.index = index
     }
 }
 

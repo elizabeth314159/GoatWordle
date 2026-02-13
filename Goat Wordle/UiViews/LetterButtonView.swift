@@ -12,12 +12,12 @@ struct LetterButtonView: View {
     var letter: String
     var body: some View {
         Button {
-            dm.addToCurrentWord(letter)
+            dm.addToCurrentWord(letter.lowercased())
         } label: {
-            Text(letter)
+            Text(letter.uppercased())
                 .font(.system(size: 20))
                 .frame(width: 35, height: 50)
-                .background(dm.keyColors[letter])
+                .background(dm.keyColors[letter] ?? .unused)
                 .foregroundColor(.primary)
         }
         .buttonStyle(.plain)

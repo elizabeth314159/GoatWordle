@@ -29,12 +29,12 @@ struct PlayScreen: View {
                         
                     }
                     VStack(spacing: 3) {
-                        GuessView(guess: $dm.guesses[0])
-                        GuessView(guess: $dm.guesses[1])
-                        GuessView(guess: $dm.guesses[2])
-                        GuessView(guess: $dm.guesses[3])
-                        GuessView(guess: $dm.guesses[4])
-                        GuessView(guess: $dm.guesses[5])
+                        GuessView(guess: dm.guesses[0])
+                        GuessView(guess: dm.guesses[1])
+                        GuessView(guess: dm.guesses[2])
+                        GuessView(guess: dm.guesses[3])
+                        GuessView(guess: dm.guesses[4])
+                        GuessView(guess: dm.guesses[5])
                     }
                     .frame(width: Global.boardWidth, height: 6 * Global.boardWidth/5)
                     
