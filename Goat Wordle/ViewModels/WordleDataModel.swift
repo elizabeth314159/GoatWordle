@@ -125,14 +125,17 @@ class WordleDataModel: ObservableObject {
             let guessLetter = guesses[tryIndex].guessLetters[index]
             if guessLetter == correctLetter {
                 guesses[tryIndex].bgColors[index] = .correct
-                frequency[guessLetter]! -= 1
+                
                 if !matchedLetters.contains(guessLetter) {
                     matchedLetters.append(guessLetter)
                     keyColors[guessLetter] = .correct
                 }
-                if let index = misplacedLetters.firstIndex(of: guessLetter) {
-                    misplacedLetters.remove(at: index)
+                if misplacedLetters.contains(guessLetter) {
+                    if let index = misplacedLetters.firstIndex(of: guessLetter) {
+                        misplacedLetters.remove(at: index)
+                    }
                 }
+                frequency[guessLetter]! -= 1
             }
             
             

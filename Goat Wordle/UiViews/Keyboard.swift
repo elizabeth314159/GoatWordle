@@ -9,9 +9,9 @@ import SwiftUI
 
 struct Keyboard: View {
     @EnvironmentObject var dm: WordleDataModel
-    var topRowArray = "QWERTYUIOP".map{ String($0)}
-    var secondRowArray = "ASDFGHJKL".map{ String($0)}
-    var thirdRowArray = "ZXCVBNM".map{ String($0)}
+    var topRowArray = "qwertyuiop".map{ String($0)}
+    var secondRowArray = "asdfghjkl".map{ String($0)}
+    var thirdRowArray = "zxcvbnm".map{ String($0)}
     
     var body: some View {
         VStack {

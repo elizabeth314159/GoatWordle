@@ -14,7 +14,7 @@ struct LetterButtonView: View {
         Button {
             dm.addToCurrentWord(letter.lowercased())
         } label: {
-            Text(letter.uppercased())
+            Text(letter)
                 .font(.system(size: 20))
                 .frame(width: 35, height: 50)
                 .background(dm.keyColors[letter] ?? .unused)
@@ -26,6 +26,6 @@ struct LetterButtonView: View {
 
 
 #Preview {
-    LetterButtonView(letter: "L")
+    LetterButtonView(letter: "l")
         .environmentObject(WordleDataModel())
 }
