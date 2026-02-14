@@ -24,7 +24,7 @@ class WordleDataModel: ObservableObject {
     @Published var gameOver = false
     @Published var toastWords = ["Genius", "Magnificent", "Impressive", "Splendid", "Great", "Phew!"]
     
-    private var isTesting = true
+    private var isTesting = false
     
     var gameStarted: Bool {
         !currentWord.isEmpty || tryIndex > 0
