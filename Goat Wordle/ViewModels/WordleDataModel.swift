@@ -10,7 +10,7 @@ import SwiftUI
 class WordleDataModel: ObservableObject {
     @Published var guesses: [Guess] = []
     @Published var incorrentAttempts = [Int](repeating: 0, count: 6)
-    
+    @Published var toastText: String?
     
     @Published var keyColors = [String: Color]()
     @Published var matchedLetters = [String]()
@@ -22,6 +22,7 @@ class WordleDataModel: ObservableObject {
     
     @Published var inPlay = false
     @Published var gameOver = false
+    @Published var toastWords = ["Genius", "Magnificent", "Impressive", "Splendid", "Great", "Phew!"]
     
     private var isTesting = true
     
@@ -77,6 +78,7 @@ class WordleDataModel: ObservableObject {
             print("you win")
             setCurrentGuessColors()
             inPlay = false
+            showToast(with: toastWords[tryIndex])
         } else {
             if verifyWord() {
                 print("Valid word")
@@ -90,6 +92,7 @@ class WordleDataModel: ObservableObject {
                 currentWord = ""
             } else {
                 print("invalid")
+                showToast(with: "Not in word list")
             }
         }
     }
@@ -169,6 +172,15 @@ class WordleDataModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(col) * 0.2) {
                 self.guesses[row].cardFlipped[col].toggle()
             }
+        }
+    }
+    
+    func showToast(with text: String?) {
+        withAnimation {
+            toastText = text
+        }
+        withAnimation(Animation.linear(duration: 0.2).delay(3)) {
+            toastText = nil
         }
     }
 }

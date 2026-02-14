@@ -37,6 +37,12 @@ struct PlayScreen: View {
                         GuessView(guess: dm.guesses[5])
                     }
                     .frame(width: Global.boardWidth, height: 6 * Global.boardWidth/5)
+                    .overlay(alignment: .top) {
+                        if let toastText = dm.toastText {
+                            ToastView(toastText: toastText)
+                                .offset(y: 20)
+                        }
+                    }
                     
                     Keyboard()
                         .scaleEffect(Global.keyboardScale)
@@ -56,27 +62,46 @@ struct PlayScreen: View {
                             .navigationBarTitleDisplayMode(.inline)
                     }
                             ToolbarItem(placement: .topBarLeading) {
-                                NavigationLink(destination: directions()) {
-                                    Text("?  ")
-                                    
-                                        .font(.system(size: 40, weight: .bold, design: .rounded))
+                                HStack {
+                                    if !dm.inPlay {
+                                        Button {
+                                            dm.newGame()
+                                        } label: {
+                                            Text("New???")
+                                                .font(.system(size: 40, weight: .bold, design: .rounded))
+                                                .padding(.horizontal, 5)
+                                                .padding(.vertical, 5)
+                                                .background(Color.yellow)
+                                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.orange, lineWidth: 5))
+                                                .foregroundColor(.red)
+                                        }
+                                    }
+                                    if dm.inPlay {
+                                        NavigationLink(destination: directions()) {
+                                            Text("?  ")
+                                            
+                                                .font(.system(size: 40, weight: .bold, design: .rounded))
+                                                .padding(.horizontal, 5)
+                                                .padding(.vertical, 5)
+                                                .background(Color.mint)
+                                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.orange, lineWidth: 5))
+                                                .foregroundColor(.black)
+                                        }
+                                    }
+                                }
+                            }
+                        ToolbarItem(placement: .topBarTrailing) {
+                            if dm.inPlay {
+                                NavigationLink(destination: Menu()) {
+                                    Text("Menu")
+                                        .font(.system(size: 35, weight: .bold, design: .rounded))
                                         .padding(.horizontal, 5)
                                         .padding(.vertical, 5)
                                         .background(Color.mint)
                                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.orange, lineWidth: 5))
                                         .foregroundColor(.black)
+                                    
                                 }
-                            }
-                        ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink(destination: Menu()) {
-                                Text("Menu")
-                                    .font(.system(size: 35, weight: .bold, design: .rounded))
-                                    .padding(.horizontal, 5)
-                                    .padding(.vertical, 5)
-                                    .background(Color.mint)
-                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.orange, lineWidth: 5))
-                                    .foregroundColor(.black)
-                                
                             }
                         }
                     }
